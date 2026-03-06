@@ -1,0 +1,92 @@
+import { useEffect, useState } from 'react';
+import Item from './Item';
+
+const List = () => {
+  const [item, setItem] = useState('');
+  const [list, setList] = useState([]);
+  const [quote, setQuote] = useState('Your only limit is your mind');
+  const [taskDone, setTaskDone] = useState(0);
+
+  //Input task
+  const onChangeHandler = (e) => {
+    return setItem(e.target.value);
+  };
+
+  //Add task
+  const onClickHandler = () => {
+    if (!item) return;
+    setList([...list, item]);
+    setItem('');
+  };
+
+  // Get Quote
+  const getQuote = async () => {
+    try {
+      const response = await fetch('https://gary.rest/api');
+      const data = await response.json();
+
+      if (response.ok) setQuote(data.quote);
+      else setQuote('Your only limit is your mind');
+    } catch (error) {
+      console.error('Error load quote:', error);
+      setQuote('Your only limit is your mind');
+    }
+  };
+
+  //Update quote by timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getQuote();
+    }, 100000); // every 100 second
+
+    return () => clearInterval(interval); // clear interval when unmount
+  }, []);
+
+  return (
+    <div className='mx-auto max-h-[80vh] max-w-6xl rounded-4xl bg-white/10 p-20 text-center'>
+      <h1 className='font-[Amsterdam-four] text-brand mb-12 text-5xl font-extrabold underline underline-offset-12'>
+        Todo List
+      </h1>
+      <p className='mb-16 max-w-xl mx-auto'>{quote}</p>
+
+      <div className='flex flex-col items-center gap-4'>
+        <div className='mb-4 flex'>
+          <input
+            type='text'
+            value={item}
+            className='outline-brand rounded-tl-4xl rounded-bl-4xl bg-white/20 px-5 py-2.5 outline-1'
+            onChange={onChangeHandler}
+          />
+          <input
+            type='submit'
+            className='bg-brand-secondary cursor-pointer rounded-tr-4xl rounded-br-4xl px-5 py-2.5'
+            onClick={onClickHandler}
+          />
+        </div>
+
+        {list.length > 0 && (
+          <div>
+            <p>
+              Task amount: {list.length} /
+              <span className='text-brand font-bold'> Done: {taskDone}</span>
+            </p>
+          </div>
+        )}
+
+        <ul className='max-h-[20vh] w-full space-y-4 overflow-y-auto flex-1'>
+          {list.map((item, index) => {
+            return (
+              <Item
+                key={index}
+                id={index}
+                text={item}
+                onCheckChange={setTaskDone}
+              />
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+};
+export default List;
