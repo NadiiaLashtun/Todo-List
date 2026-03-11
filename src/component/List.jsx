@@ -1,22 +1,37 @@
 import { useEffect, useState } from 'react';
+import { XCircleIcon } from '@heroicons/react/24/solid';
+import Button from './Button';
 import Item from './Item';
 
 const List = () => {
-  const [item, setItem] = useState('');
+  const [task, setTask] = useState('');
   const [list, setList] = useState([]);
   const [quote, setQuote] = useState('Your only limit is your mind');
   const [taskDone, setTaskDone] = useState(0);
 
   //Input task
   const onChangeHandler = (e) => {
-    return setItem(e.target.value);
+    return setTask(e.target.value);
   };
 
   //Add task
   const onClickHandler = () => {
-    if (!item) return;
-    setList([...list, item]);
-    setItem('');
+    if (!task.trim) return;
+    setList([...list, { id: Date.now(), text: task }]);
+    setTask('');
+  };
+
+  //Delete task
+  const onDeleteHandler = (id) => {
+    console.log('delete');
+
+    let filteredList = list.filter((task) => {
+      console.log(task.id);
+      console.log(id);
+      return task.id !== id;
+    });
+    console.log(filteredList);
+    setList(filteredList);
   };
 
   // Get Quote
@@ -53,7 +68,7 @@ const List = () => {
         <div className='mb-4 flex'>
           <input
             type='text'
-            value={item}
+            value={task}
             className='outline-brand rounded-tl-4xl rounded-bl-4xl bg-white/20 px-5 py-2.5 outline-1'
             onChange={onChangeHandler}
           />
@@ -74,14 +89,24 @@ const List = () => {
         )}
 
         <ul className='max-h-[20vh] w-full space-y-4 overflow-y-auto flex-1'>
-          {list.map((item, index) => {
+          {list.map((task) => {
             return (
               <Item
-                key={index}
-                id={index}
-                text={item}
+                key={task.id}
+                id={task.id}
+                text={task.text}
                 onCheckChange={setTaskDone}
-              />
+              >
+                {
+                  <Button
+                    type='button'
+                    text={
+                      <XCircleIcon className='text-brand size-9 font-bold' />
+                    }
+                    onClick={() => onDeleteHandler(task.id)}
+                  />
+                }
+              </Item>
             );
           })}
         </ul>

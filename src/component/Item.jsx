@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
-const Item = ({ id, text, onCheckChange }) => {
+const Item = ({ id, text, onCheckChange, children }) => {
   let [checked, setChecked] = useState(false);
 
   const onCheckedHandler = () => {
@@ -37,6 +37,7 @@ const Item = ({ id, text, onCheckChange }) => {
       >
         {text}
       </span>
+      {children}
     </li>
   );
 };
