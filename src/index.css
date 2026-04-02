@@ -19,7 +19,7 @@
 }
 
 body {
-  @apply flex items-center justify-center min-h-screen p-20 m-0 text-white 
+  @apply m-0 text-white 
          bg-[url('/img/bg-hero.jpg')] bg-bottom bg-cover bg-no-repeat;
 }
 

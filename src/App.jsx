@@ -1,11 +1,26 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import List from './component/List';
+import Layout from './component/layout/Layout';
+import Home from './component/pages/Home';
+import List from './component/pages/List';
 
 function App() {
   return (
-    <>
-      <List />
-    </>
+    <Routes>
+      <Route
+        path='/'
+        element={<Layout />}
+      >
+        <Route
+          index='/'
+          element={<Home />}
+        />
+        <Route
+          path='/list'
+          element={<List />}
+        />
+      </Route>
+    </Routes>
   );
 }
 

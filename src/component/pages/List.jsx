@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import Button from './Button';
-import Item from './Item';
+import Button from '../Button';
+import Item from '../Item';
 
 const List = () => {
   const [task, setTask] = useState('');
@@ -16,21 +16,19 @@ const List = () => {
 
   //Add task
   const onClickHandler = () => {
-    if (!task.trim) return;
-    setList([...list, { id: Date.now(), text: task }]);
+    if (!task.trim()) return;
+    const newList = [...list, { id: Date.now(), text: task }];
+    setList(newList);
     setTask('');
+
+    //Save changes
+    console.log(list);
+    localStorage.setItem('Task List', JSON.stringify(newList));
   };
 
   //Delete task
   const onDeleteHandler = (id) => {
-    console.log('delete');
-
-    let filteredList = list.filter((task) => {
-      console.log(task.id);
-      console.log(id);
-      return task.id !== id;
-    });
-    console.log(filteredList);
+    let filteredList = list.filter((task) => task.id !== id);
     setList(filteredList);
   };
 
@@ -71,6 +69,9 @@ const List = () => {
             value={task}
             className='outline-brand rounded-tl-4xl rounded-bl-4xl bg-white/20 px-5 py-2.5 outline-1'
             onChange={onChangeHandler}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') onClickHandler();
+            }}
           />
           <input
             type='submit'
