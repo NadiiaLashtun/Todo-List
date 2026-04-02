@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <header>
-      <ul className='flex gap-4 justify-center p-5  border-b-1 border-white/10'>
+      <ul className='flex gap-6 justify-center p-5  border-b-1 border-mauve-400/10'>
         <li>
           <NavLink
             to='/'

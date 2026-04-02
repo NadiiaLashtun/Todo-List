@@ -56,7 +56,7 @@ const List = () => {
   }, []);
 
   return (
-    <div className='mx-auto max-h-[80vh] max-w-6xl rounded-4xl bg-white/10 p-20 text-center'>
+    <div className='mx-auto max-h-[80vh] max-w-6xl rounded-4xl bg-mauve-400/10 p-20 text-center'>
       <h1 className='font-[Amsterdam-four] text-brand mb-12 text-5xl font-extrabold underline underline-offset-12'>
         Todo List
       </h1>

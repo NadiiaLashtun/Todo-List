@@ -19,8 +19,9 @@
 }
 
 body {
-  @apply m-0 text-white 
-         bg-[url('/img/bg-hero.jpg')] bg-bottom bg-cover bg-no-repeat;
+  @apply m-0 text-[#b6b6b4] bg-black/80 
+         bg-[url('/img/bg-hero.jpg')]  bg-blend-darken
+         bg-bottom bg-cover bg-no-repeat;
 }
 
 ::-webkit-scrollbar {

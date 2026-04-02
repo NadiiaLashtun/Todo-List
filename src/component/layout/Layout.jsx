@@ -4,9 +4,9 @@ import Footer from '../Footer';
 
 const Layout = () => {
   return (
-    <div className='flex flex-col justify-between align-center min-h-screen'>
+    <div className='flex flex-col justify-between min-h-screen'>
       <Header />
-      <main className='flex-1 p-20 h-full'>
+      <main className='flex-1 flex items-center p-20'>
         <Outlet />
       </main>
       <Footer />
