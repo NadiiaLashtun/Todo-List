@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Logo from '/src/assets/logo.png';
 
 const Header = () => {
   //Indicate active page
@@ -8,8 +9,19 @@ const Header = () => {
       : '';
 
   return (
-    <header>
-      <ul className='flex gap-6 justify-center p-5  border-b-1 border-mauve-400/10'>
+    <header className='flex justify-between items-center py-1 px-20 border-b border-mauve-400/10'>
+      <NavLink
+        to='/'
+        className={getActiveLink}
+      >
+        <img
+          src={Logo}
+          alt='Task pulse'
+          className='w-16 cursor-pointer'
+        />
+      </NavLink>
+
+      <ul className='flex gap-6 justify-center'>
         <li>
           <NavLink
             to='/'
