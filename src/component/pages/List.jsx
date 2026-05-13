@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import Button from '../Button';
 import Item from '../Item';
+import { useFetch } from '../../hooks/useFetch';
+import { Spinner } from '../Spinner';
 
 const List = () => {
   const [task, setTask] = useState('');
   const [list, setList] = useState([]);
-  const [quote, setQuote] = useState('Your only limit is your mind');
   const [taskDone, setTaskDone] = useState(0);
+  const { quote, isLoading, error, fetchData } = useFetch();
 
   //Input task
   const onChangeHandler = (e) => {
@@ -32,35 +34,14 @@ const List = () => {
     setList(filteredList);
   };
 
-  // Get Quote
-  const getQuote = async () => {
-    try {
-      const response = await fetch('https://gary.rest/api');
-      const data = await response.json();
-
-      if (response.ok) setQuote(data.quote);
-      else setQuote('Your only limit is your mind');
-    } catch (error) {
-      console.error('Error load quote:', error);
-      setQuote('Your only limit is your mind');
-    }
-  };
-
-  //Update quote by timer
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getQuote();
-    }, 100000); // every 100 second
-
-    return () => clearInterval(interval); // clear interval when unmount
-  }, []);
-
   return (
     <div className='mx-auto max-h-[80vh] max-w-6xl rounded-4xl bg-mauve-400/10 p-20 text-center'>
-      <h1 className='font-[Amsterdam-four] text-brand mb-12 text-5xl font-extrabold underline underline-offset-12'>
+      <h1 className='font-[Amsterdam-four] text-brand mb-18 text-5xl font-extrabold underline underline-offset-12'>
         Todo List
       </h1>
-      <p className='mb-16 max-w-xl mx-auto'>{quote}</p>
+      <div className='mb-16'>
+        {isLoading ? <Spinner /> : <p className='max-w-xl mx-auto'>{quote}</p>}
+      </div>
 
       <div className='flex flex-col items-center gap-4'>
         <div className='mb-4 flex'>

@@ -8,6 +8,8 @@
 }
 
 @theme {
+  --color-primary: #a89ea9;
+  --color-primary-light: #b6b6b418;
   --color-brand: #860b66;
   --color-brand-secondary: #2f4b30;
 }
@@ -30,6 +32,23 @@ body {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-white opacity-90 rounded-xl;
+}
+
+@layer base {
+  @keyframes infinity {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: -200;
+    }
+  }
+}
+
+@layer utilities {
+  .animate-infinity {
+    animation: infinity 1.4s linear infinite;
+  }
 }
 
 /* :root {
