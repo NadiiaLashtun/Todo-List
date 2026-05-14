@@ -1,14 +1,20 @@
-import { Outlet } from 'react-router';
-import Header from '../Header';
-import Footer from '../Footer';
+import { Suspense } from "react";
+import { Outlet } from "react-router";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Spinner } from "../Spinner";
 
 const Layout = () => {
   return (
-    <div className='flex flex-col justify-between min-h-screen'>
+    <div className="flex min-h-screen flex-col bg-black/80 bg-[url('/img/bg-hero.jpg')] bg-cover bg-bottom bg-blend-darken">
       <Header />
-      <main className='flex-1 flex justify-center items-center p-20'>
-        <Outlet />
+
+      <main className="flex flex-1 items-center justify-center p-20">
+        <Suspense fallback={<Spinner />}>
+          <Outlet />
+        </Suspense>
       </main>
+
       <Footer />
     </div>
   );

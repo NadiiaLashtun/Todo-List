@@ -1,8 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @font-face {
-  font-family: 'Amsterdam-four';
-  src: url('/src/fonts/amsterdam-four.woff2') format('woff2');
+  font-family: "Amsterdam-four";
+  src: url("/src/fonts/amsterdam-four.woff2") format("woff2");
   font-style: normal;
   font-display: swap;
 }
@@ -21,9 +21,7 @@
 }
 
 body {
-  @apply m-0 text-[#b6b6b4] bg-black/80 
-         bg-[url('/img/bg-hero.jpg')]  bg-blend-darken
-         bg-bottom bg-cover bg-no-repeat;
+  @apply m-0 bg-black/80 text-[#b6b6b4];
 }
 
 ::-webkit-scrollbar {
@@ -31,7 +29,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white opacity-90 rounded-xl;
+  @apply rounded-xl bg-white opacity-90;
 }
 
 @layer base {
