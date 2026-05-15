@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Amsterdam-four";
-  src: url("/src/fonts/amsterdam-four.woff2") format("woff2");
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --color-primary: #a89ea9;
   --color-primary-light: #b6b6b418;
@@ -14,25 +7,32 @@
   --color-brand-secondary: #2f4b30;
 }
 
-*,
-*::before,
-*::after {
-  @apply box-border;
-}
-
-body {
-  @apply m-0 bg-black/80 text-[#b6b6b4];
-}
-
-::-webkit-scrollbar {
-  @apply w-1;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply rounded-xl bg-white opacity-90;
-}
-
 @layer base {
+  @font-face {
+    font-family: "Amsterdam-four";
+    src: url("/src/fonts/amsterdam-four.woff2") format("woff2");
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  body {
+    @apply m-0 bg-black/80 text-[#b6b6b4];
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-xl bg-white opacity-90;
+  }
+
   @keyframes infinity {
     from {
       stroke-dashoffset: 0;
@@ -40,6 +40,12 @@ body {
     to {
       stroke-dashoffset: -200;
     }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply cursor-pointer rounded-full bg-brand-secondary px-5 py-2 transition-all duration-500;
   }
 }
 
