@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const LogIn = ({ setIsAuth }) => {
+const LogIn = () => {
   const [formValue, setFormValue] = useState({
     name: "",
     email: "",
   });
+  const { setIsAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {

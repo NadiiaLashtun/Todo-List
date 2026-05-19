@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import Logo from "/src/assets/logo.png";
+import { AuthContext } from "../context/AuthContext";
 
-const Header = ({ isAuth }) => {
+const Header = () => {
+  const { isAuth } = useContext(AuthContext);
+
   //Indicate active page
   const getActiveLink = ({ isActive }) =>
     isActive
